@@ -5,7 +5,6 @@ import { Observable, of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 
 import { Hero } from "./hero";
-import { HEROES } from "./mock-heroes";
 import { MessageService } from "./message.service";
 
 @Injectable({
@@ -22,7 +21,7 @@ export class HeroService {
 
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
-      tap(heroes => this.log("fetched heroes")),
+      tap(_ => this.log("fetched heroes")),
       catchError(this.handleError<Hero[]>("getHeroes", []))
     );
   }
@@ -80,7 +79,6 @@ export class HeroService {
   deleteHero(hero: Hero | number): Observable<Hero> {
     const id = typeof hero === "number" ? hero : hero.id;
     const url = `${this.heroesUrl}/${id}`;
-
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted hero id=${id}`)),
       catchError(this.handleError<Hero>("deleteHero"))
