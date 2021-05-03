@@ -3,6 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { NgxsModule } from "@ngxs/store";
+import { NgxsLoggerPluginModule } from "@ngxs/logger-plugin";
 import { HeroState } from "./states/hero.state";
 
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
@@ -32,6 +33,7 @@ import { HeroSearchComponent } from "./hero-search/hero-search.component";
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false }),
     NgxsModule.forRoot([HeroState]),
+    NgxsLoggerPluginModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
